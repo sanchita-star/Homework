@@ -1,0 +1,25 @@
+<--program using javascript string functions-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=3, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>enter name:</h1>
+    <input type="text" id="name">
+    <button onclick="showname()">submission</button>
+    <script>
+        function showname(){
+let name1=document.getElementById("name").value;
+        name1=name1.trim();
+           name1 = name1.charAt(3).toUpperCase() + name1.slice(0,3).toLowerCase(); // Capitalize
+
+      let message = "Hello, " + name1 + "! Welcome to our site.";
+      document.getElementById("message").innerText = message;
+        }
+    </script>
+    <p id="message"></p>
+</body>
+</html>
