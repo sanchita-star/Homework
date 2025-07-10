@@ -1,0 +1,30 @@
+<--program which uses document object model methods in javascript-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="helo">
+    <h1 id="hote">Ruby hotel</h1>
+    <button onclick="showmsg()">Enter:</button>
+   <script>
+function showmsg(){
+  
+let hote1=document.getElementById("hote"); //document object module method
+    hote1.style.color="pink";
+hote1.textContent="welcome to our hotel...........";
+ let frame = document.querySelector(".helo");  //document object model method
+frame.style.border = "5px solid hotpink";
+frame.style.padding = "30px";
+ frame.style.margin = "50px auto";
+frame.style.backgroundColor = "lavenderblush";
+frame.style.borderRadius = "15px";
+frame.style.boxShadow = "0 0 15px rgba(255, 105, 180, 0.5)";
+ frame.style.textAlign = "center";
+ frame.style.fontFamily = "Arial, sans-serif";
+}
+   </script> 
+</body>
+</html>
