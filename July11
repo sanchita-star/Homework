@@ -1,0 +1,128 @@
+//Browser object model (BOM) in javascript i learned this today which is used in the format where we accept or reject cookies in websites
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOM Interactive Example</title>
+  
+  <style>
+    body {
+      background: #111;
+      color: #eee;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #00ffd5;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #00aaff;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #007acc;
+    }
+    #infoBox {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #222;
+      border: 1px solid #444;
+      border-radius: 10px;
+      text-align: left;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .info-title {
+      color: #ffcc00;
+      margin-top: 15px;
+      text-decoration: underline;
+    }
+    .info {
+      margin: 8px 0;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Interactive BOM (Browser Object Model)</h1>
+  <button onclick="BomAction()">Click here to see BOM Details</button>
+
+  <div id="infoBox" style="display: none;"></div>
+
+  <script>
+    function BomAction() {
+      alert("Welcome to the BOM Model!");
+
+      let name = prompt("Enter your name", "Type your name here");
+      if (!name) {
+        alert("No name entered. Action cancelled.");
+        return;
+      }
+
+      let isSure = confirm("Are you sure you want to proceed, " + name + "?");
+
+      if (!isSure) {
+        alert("Action cancelled.");
+        return;
+      }
+
+      alert("Hello, " + name + "! Here’s your system and browser info below 👇");
+
+      // Show the info box
+      document.getElementById("infoBox").style.display = "block";
+
+      // Collect BOM info
+      const info = {
+        "User Agent": navigator.userAgent,
+        "Platform (OS)": navigator.platform,
+        "Browser Name": navigator.appName,
+        "Browser Version": navigator.appVersion,
+        "Browser Language": navigator.language,
+        "Cookies Enabled": navigator.cookieEnabled,
+        "Java Enabled": navigator.javaEnabled(),
+        "Online Status": navigator.onLine,
+        "Screen Width": screen.width,
+        "Screen Height": screen.height,
+        "Screen Color Depth": screen.colorDepth,
+        "Screen Pixel Depth": screen.pixelDepth,
+        "Window Inner Width": window.innerWidth,
+        "Window Inner Height": window.innerHeight,
+        "Window Outer Width": window.outerWidth,
+        "Window Outer Height": window.outerHeight,
+        "Current Page URL": window.location.href,
+        "Page Title": document.title,
+      };
+
+      // Show on screen
+      let output = `<div class="info-title">👨‍💻 Hello, ${name}!</div>`;
+      output += `<div class="info-title">🔍 Your BOM Information:</div>`;
+
+      for (let key in info) {
+        output += `<div class="info"><strong>${key}:</strong> ${info[key]}</div>`;
+      }
+
+      document.getElementById("infoBox").innerHTML = output;
+    }
+
+    // Optional: update dimensions if window resizes
+    window.addEventListener("resize", () => {
+      const box = document.getElementById("infoBox");
+      if (box.style.display === "block") {
+        BomAction(); // Re-run to update screen dimensions
+      }
+    });
+  </script>
+
+</body>
+</html>
