@@ -1,0 +1,68 @@
+//code to connect jsp sevlet to database of mysql 
+package com.ssp;
+
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/registeration1")
+public class Studentregi extends HttpServlet {
+
+	
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String stunme = request.getParameter("StudentName");
+        String phno = request.getParameter("PhoneNumber");
+        int mob = Integer.parseInt(phno);
+        String Clgnme = request.getParameter("CollegeName");
+        String Cls = request.getParameter("Class");
+        String Add = request.getParameter("Address");
+        String np = request.getParameter("newpass");
+        String cp = request.getParameter("confirmpass");
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+		out.println(stunme);
+		out.println(mob);
+		out.println(Clgnme);
+		out.println(Cls);
+		out.println(Add);
+		out.println(np);
+		out.println(cp);
+
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/hostel", "root", "root");
+			
+            PreparedStatement p = c.prepareStatement("INSERT INTO register (studnme, phoneno, clgnme, 'class', address, npass, cpass) VALUES (?, ?, ?, ?, ?, ?, ?)");
+
+            p.setString(1, stunme);
+            p.setInt(2, mob);
+            p.setString(3, Clgnme);
+            p.setString(4, Cls);
+            p.setString(5, Add);
+            p.setString(6, np);
+            p.setString(7, cp);
+            p.execute();
+
+            out.println("<h3>Registration successful!</h3>");
+            c.close();
+
+        } catch (Exception  e) {
+            out.println("<h3>Error during registration: " + e.getMessage() + "</h3>");
+            e.printStackTrace();
+        }
+       
+    }
+}
